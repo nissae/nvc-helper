@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="NVC Companion - A tool for practicing Non-Violent Communication">
+    <title>NVC Companion</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <h1>NVC Companion</h1>
+            <p class="subtitle">Non-Violent Communication Helper</p>
+            <nav class="nav-tabs">
+                <button class="tab-btn active" data-tab="input">New Entry</button>
+                <button class="tab-btn" data-tab="history">History</button>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Input Form Section -->
+            <section id="input-section" class="section active">
+                <form id="nvc-form" class="nvc-form">
+                    <!-- Observation -->
+                    <div class="form-group">
+                        <label for="observation">
+                            <span class="label-icon">👁️</span>
+                            Observation
+                        </label>
+                        <p class="field-hint">What do you observe (see, hear, remember) that does or does not contribute to your well-being?</p>
+                        <textarea 
+                            id="observation" 
+                            name="observation" 
+                            placeholder="When I see/hear/notice..."
+                            rows="3"
+                            required
+                        ></textarea>
+                    </div>
+
+                    <!-- Feeling -->
+                    <div class="form-group">
+                        <label for="feeling">
+                            <span class="label-icon">💭</span>
+                            Feeling
+                        </label>
+                        <p class="field-hint">How do you feel in relation to what you observe?</p>
+                        <textarea 
+                            id="feeling" 
+                            name="feeling" 
+                            placeholder="I feel..."
+                            rows="3"
+                            required
+                        ></textarea>
+                    </div>
+
+                    <!-- Need -->
+                    <div class="form-group">
+                        <label for="need">
+                            <span class="label-icon">🌱</span>
+                            Need
+                        </label>
+                        <p class="field-hint">What needs, values, or desires create your feelings?</p>
+                        <textarea 
+                            id="need" 
+                            name="need" 
+                            placeholder="Because I need/value..."
+                            rows="3"
+                            required
+                        ></textarea>
+                    </div>
+
+                    <!-- Request -->
+                    <div class="form-group">
+                        <label for="request">
+                            <span class="label-icon">🤝</span>
+                            Request
+                        </label>
+                        <p class="field-hint">What concrete actions would you request to enrich your life?</p>
+                        <textarea 
+                            id="request" 
+                            name="request" 
+                            placeholder="Would you be willing to..."
+                            rows="3"
+                            required
+                        ></textarea>
+                    </div>
+
+                    <!-- Form Actions -->
+                    <div class="form-actions">
+                        <button type="button" id="clear-btn" class="btn btn-secondary">Clear</button>
+                        <button type="submit" class="btn btn-primary">Save Entry</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- History Section -->
+            <section id="history-section" class="section">
+                <div class="history-header">
+                    <h2>Past Entries</h2>
+                    <div class="history-actions">
+                        <button id="export-json-btn" class="btn btn-secondary btn-small">Export JSON</button>
+                        <button id="export-text-btn" class="btn btn-secondary btn-small">Export Text</button>
+                        <button id="clear-all-btn" class="btn btn-danger btn-small">Clear All</button>
+                    </div>
+                </div>
+                <div id="history-list" class="history-list">
+                    <!-- History entries will be dynamically inserted here -->
+                </div>
+                <div id="empty-state" class="empty-state">
+                    <p>No entries yet. Start by creating a new NVC entry!</p>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Your data is stored locally and never leaves your device.</p>
+        </footer>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="edit-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Edit Entry</h3>
+                <button class="modal-close" id="modal-close">&times;</button>
+            </div>
+            <form id="edit-form" class="nvc-form">
+                <input type="hidden" id="edit-id">
+                <div class="form-group">
+                    <label for="edit-observation">Observation</label>
+                    <textarea id="edit-observation" name="observation" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="edit-feeling">Feeling</label>
+                    <textarea id="edit-feeling" name="feeling" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="edit-need">Need</label>
+                    <textarea id="edit-need" name="need" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="edit-request">Request</label>
+                    <textarea id="edit-request" name="request" rows="3" required></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" id="cancel-edit-btn" class="btn btn-secondary">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
