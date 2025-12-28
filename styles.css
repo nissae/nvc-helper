@@ -200,7 +200,8 @@ body {
     font-style: italic;
 }
 
-textarea {
+textarea,
+input[type='text'] {
     width: 100%;
     padding: var(--spacing-md);
     border: 2px solid var(--gray-200);
@@ -208,21 +209,26 @@ textarea {
     font-family: inherit;
     font-size: 1rem;
     line-height: 1.5;
-    resize: vertical;
     transition:
         border-color var(--transition-fast),
         box-shadow var(--transition-fast);
     background: var(--gray-50);
 }
 
-textarea:focus {
+input[type='text'] {
+    height: auto;
+}
+
+textarea:focus,
+input[type='text']:focus {
     outline: none;
     border-color: var(--primary-blue-light);
     box-shadow: 0 0 0 3px rgba(74, 144, 164, 0.15);
     background: white;
 }
 
-textarea::placeholder {
+textarea::placeholder,
+input[type='text']::placeholder {
     color: var(--gray-400);
 }
 
