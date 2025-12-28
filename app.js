@@ -3,7 +3,7 @@
  * A tool for practicing Non-Violent Communication
  */
 
-(function() {
+(function () {
     'use strict';
 
     // Storage key for localStorage
@@ -15,7 +15,7 @@
         tabBtns: document.querySelectorAll('.tab-btn'),
         inputSection: document.getElementById('input-section'),
         historySection: document.getElementById('history-section'),
-        
+
         // Form
         nvcForm: document.getElementById('nvc-form'),
         observationInput: document.getElementById('observation'),
@@ -23,14 +23,14 @@
         needInput: document.getElementById('need'),
         requestInput: document.getElementById('request'),
         clearBtn: document.getElementById('clear-btn'),
-        
+
         // History
         historyList: document.getElementById('history-list'),
         emptyState: document.getElementById('empty-state'),
         exportJsonBtn: document.getElementById('export-json-btn'),
         exportTextBtn: document.getElementById('export-text-btn'),
         clearAllBtn: document.getElementById('clear-all-btn'),
-        
+
         // Modal
         editModal: document.getElementById('edit-modal'),
         editForm: document.getElementById('edit-form'),
@@ -41,7 +41,7 @@
         editRequest: document.getElementById('edit-request'),
         modalClose: document.getElementById('modal-close'),
         cancelEditBtn: document.getElementById('cancel-edit-btn'),
-        
+
         // Toast
         toast: document.getElementById('toast')
     };
@@ -70,6 +70,13 @@
         // Form submission
         elements.nvcForm.addEventListener('submit', handleFormSubmit);
         elements.clearBtn.addEventListener('click', clearForm);
+
+        // Quick Add buttons
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('quick-add-btn')) {
+                handleQuickAdd(e.target);
+            }
+        });
 
         // History actions
         elements.exportJsonBtn.addEventListener('click', exportAsJson);
@@ -137,6 +144,45 @@
     function clearForm() {
         elements.nvcForm.reset();
         elements.observationInput.focus();
+    }
+
+    /**
+     * Handle Quick Add button clicks
+     */
+    function handleQuickAdd(button) {
+        const field = button.dataset.field;
+        const value = button.dataset.value;
+
+        // Get the corresponding textarea element
+        let textarea;
+        switch (field) {
+            case 'observation':
+                textarea = elements.observationInput;
+                break;
+            case 'feeling':
+                textarea = elements.feelingInput;
+                break;
+            case 'need':
+                textarea = elements.needInput;
+                break;
+            case 'request':
+                textarea = elements.requestInput;
+                break;
+            default:
+                return;
+        }
+
+        // Add the value to the textarea
+        if (textarea.value.trim() === '') {
+            // If empty, just set the value
+            textarea.value = value;
+        } else {
+            // If not empty, append with comma
+            textarea.value = textarea.value.trim() + ', ' + value;
+        }
+
+        // Focus the textarea
+        textarea.focus();
     }
 
     /**
@@ -288,7 +334,7 @@
 
         const id = elements.editId.value;
         const index = entries.findIndex(e => e.id === id);
-        
+
         if (index === -1) return;
 
         entries[index] = {
@@ -403,10 +449,10 @@ ${entry.request}
     function showToast(message, type = 'success') {
         elements.toast.textContent = message;
         elements.toast.className = 'toast ' + type;
-        
+
         // Trigger reflow for animation (void to satisfy linter)
         void elements.toast.offsetHeight;
-        
+
         elements.toast.classList.add('show');
 
         setTimeout(() => {
