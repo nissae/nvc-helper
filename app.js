@@ -22,6 +22,8 @@
         feelingInput: document.getElementById('feeling'),
         needInput: document.getElementById('need'),
         requestInput: document.getElementById('request'),
+        request2Input: document.getElementById('request2'),
+        request3Input: document.getElementById('request3'),
         clearBtn: document.getElementById('clear-btn'),
 
         // History
@@ -39,6 +41,8 @@
         editFeeling: document.getElementById('edit-feeling'),
         editNeed: document.getElementById('edit-need'),
         editRequest: document.getElementById('edit-request'),
+        editRequest2: document.getElementById('edit-request2'),
+        editRequest3: document.getElementById('edit-request3'),
         modalClose: document.getElementById('modal-close'),
         cancelEditBtn: document.getElementById('cancel-edit-btn'),
 
@@ -129,7 +133,9 @@
             observation: elements.observationInput.value.trim(),
             feeling: elements.feelingInput.value.trim(),
             need: elements.needInput.value.trim(),
-            request: elements.requestInput.value.trim()
+            request: elements.requestInput.value.trim(),
+            request2: elements.request2Input.value.trim(),
+            request3: elements.request3Input.value.trim()
         };
 
         entries.unshift(entry);
@@ -177,9 +183,13 @@
             // If empty, just set the value
             textarea.value = value;
         } else {
+            // remove ": "
+            textarea.value = textarea.value.replace(/: $/, '');
             // If not empty, append with comma
             textarea.value = textarea.value.trim() + ', ' + value;
         }
+        textarea.value = textarea.value + ": ";
+
 
         // Focus the textarea
         textarea.focus();
@@ -273,6 +283,18 @@
                         <span class="entry-field-label">🤝 Request</span>
                         <p class="entry-field-value">${escapeHtml(entry.request)}</p>
                     </div>
+                    ${entry.request2 ? `
+                    <div class="entry-field">
+                        <span class="entry-field-label">🤝 Additional Request</span>
+                        <p class="entry-field-value">${escapeHtml(entry.request2)}</p>
+                    </div>
+                    ` : ''}
+                    ${entry.request3 ? `
+                    <div class="entry-field">
+                        <span class="entry-field-label">🤝 Another Request</span>
+                        <p class="entry-field-value">${escapeHtml(entry.request3)}</p>
+                    </div>
+                    ` : ''}
                 </div>
             </article>
         `;
@@ -313,6 +335,8 @@
         elements.editFeeling.value = entry.feeling;
         elements.editNeed.value = entry.need;
         elements.editRequest.value = entry.request;
+        elements.editRequest2.value = entry.request2 || '';
+        elements.editRequest3.value = entry.request3 || '';
 
         elements.editModal.classList.add('active');
         elements.editObservation.focus();
@@ -342,7 +366,9 @@
             observation: elements.editObservation.value.trim(),
             feeling: elements.editFeeling.value.trim(),
             need: elements.editNeed.value.trim(),
-            request: elements.editRequest.value.trim()
+            request: elements.editRequest.value.trim(),
+            request2: elements.editRequest2.value.trim(),
+            request3: elements.editRequest3.value.trim()
         };
 
         saveEntries();
@@ -405,7 +431,7 @@
 
         const text = entries.map(entry => {
             const date = new Date(entry.timestamp);
-            return `
+            let textContent = `
 === NVC Entry - ${formatDate(date)} ===
 
 OBSERVATION:
@@ -419,9 +445,27 @@ ${entry.need}
 
 REQUEST:
 ${entry.request}
+`;
 
+            if (entry.request2) {
+                textContent += `
+ADDITIONAL REQUEST:
+${entry.request2}
+`;
+            }
+
+            if (entry.request3) {
+                textContent += `
+ANOTHER REQUEST:
+${entry.request3}
+`;
+            }
+
+            textContent += `
 -------------------------------------------
-            `.trim();
+`;
+
+            return textContent.trim();
         }).join('\n\n');
 
         downloadFile(text, 'nvc-entries.txt', 'text/plain');

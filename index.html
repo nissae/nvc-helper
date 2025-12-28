@@ -27,10 +27,9 @@
                     <!-- Observation -->
                     <div class="form-group">
                         <label for="observation">
-                            <span class="label-icon">👁️</span>
                             Observation
                         </label>
-                        <p class="field-hint">What do you observe (see, hear, remember)?</p>
+                        <!-- <p class="field-hint">What do you observe (see, hear, remember)?</p> -->
                         <div class="quick-add-buttons">
                             <button type="button" class="quick-add-btn" data-field="observation" data-value="Seeing">Seeing</button>
                             <button type="button" class="quick-add-btn" data-field="observation" data-value="Hearing">Hearing</button>
@@ -39,17 +38,15 @@
                             type="text"
                             id="observation"
                             name="observation"
-                            placeholder="I see/hear/notice..."
                             required>
                     </div>
 
                     <!-- Feeling -->
                     <div class="form-group">
                         <label for="feeling">
-                            <span class="label-icon">💭</span>
                             Feeling
                         </label>
-                        <p class="field-hint">How do you feel in relation to what you observe?</p>
+                        <!-- <p class="field-hint">How do you feel in relation to what you observe?</p> -->
                         <div class="quick-add-buttons">
                             <button type="button" class="quick-add-btn" data-field="feeling" data-value="Angry">Angry</button>
                             <button type="button" class="quick-add-btn" data-field="feeling" data-value="Sad">Sad</button>
@@ -60,17 +57,15 @@
                             type="text"
                             id="feeling"
                             name="feeling"
-                            placeholder="I feel..."
                             required>
                     </div>
 
                     <!-- Need -->
                     <div class="form-group">
                         <label for="need">
-                            <span class="label-icon">🌱</span>
                             Need
                         </label>
-                        <p class="field-hint">What needs, values, or desires create your feelings?</p>
+                        <p class="field-hint">Because I need/value...</p>
                         <div class="quick-add-buttons">
                             <button type="button" class="quick-add-btn" data-field="need" data-value="Connection">Connection</button>
                             <button type="button" class="quick-add-btn" data-field="need" data-value="Respect">Respect</button>
@@ -83,22 +78,19 @@
                             type="text"
                             id="need"
                             name="need"
-                            placeholder="Because I need/value..."
                             required>
                     </div>
 
                     <!-- Request -->
                     <div class="form-group">
                         <label for="request">
-                            <span class="label-icon">🤝</span>
                             Request
                         </label>
-                        <p class="field-hint">What concrete actions would you request to help resolve this issue?</p>
+                        <p class="field-hint">Would you be willing to...</p>
                         <input
                             type="text"
                             id="request"
                             name="request"
-                            placeholder="Would you be willing to..."
                             required>
                     </div>
 
@@ -107,16 +99,14 @@
                         <input
                             type="text"
                             id="request2"
-                            name="request2"
-                            placeholder="Additional request...">
+                            name="request2">
                     </div>
 
                     <div class="form-group">
                         <input
                             type="text"
                             id="request3"
-                            name="request3"
-                            placeholder="Another request...">
+                            name="request3">
                     </div>
 
                     <!-- Form Actions -->
@@ -176,6 +166,14 @@
                 <div class="form-group">
                     <label for="edit-request">Request</label>
                     <input type="text" id="edit-request" name="request" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit-request2">Additional Request</label>
+                    <input type="text" id="edit-request2" name="request2">
+                </div>
+                <div class="form-group">
+                    <label for="edit-request3">Another Request</label>
+                    <input type="text" id="edit-request3" name="request3">
                 </div>
                 <div class="form-actions">
                     <button type="button" id="cancel-edit-btn" class="btn btn-secondary">Cancel</button>
